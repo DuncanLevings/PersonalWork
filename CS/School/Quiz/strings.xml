@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">QuizExercise</string>
+    <string name="btn_true_text">True</string>
+    <string name="btn_false_text">False</string>
+    <string name="txt_question_text"></string>
+    <string name="txt_response_text"></string>
+    <string name="btn_next_text">Start Game</string>
+    <string name="answer_correct">Correct!</string>
+    <string name="answer_wrong">Sorry, that is not correct!</string>
+    <string name="quiz_finished">You finished the quiz!</string>
+    <string name="start_over">Start Over</string>
+    <string name="next_question">Next Question</string>
+    <string name="last_question">Finish Quiz</string>
+    <string name="final_response">You got %d out of %d or %.0f%%</string>
+    <string name="btn_high_score_text">Submit to High Scores</string>
+    <string name="btn_return_text">Return to Quiz</string>
+    <string name="txt_high_scores_text">%s - %.0f%%\n</string>
+    <string name="btn_submit_high_score_text">Submit to High Score</string>
+    <string name="error_name_empty">You must enter a name to submit!</string>
+    <string-array name="questions_array">
+        <item>Toronto is the Capital of Canada</item>
+        <item>Canada is larger than the US</item>
+        <item>Canada has two official languages</item>
+        <item>Ontario is the largest province</item>
+        <item>Canada is part of the US</item>
+    </string-array>
+</resources>

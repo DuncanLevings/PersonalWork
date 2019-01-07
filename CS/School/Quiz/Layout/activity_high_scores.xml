@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="30dp"
+    android:orientation="vertical"
+    tools:context=".HighScores">
+
+    <EditText
+        android:id="@+id/edt_name_high_score"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:digits=" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        android:inputType="textPersonName"
+        android:hint="Enter Name Here"/>
+
+    <Button
+        android:id="@+id/btn_submit_high_score"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_submit_high_score_text" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/txt_high_scores"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textAlignment="textStart"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btn_return"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="@string/btn_return_text"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
+
+</LinearLayout>
