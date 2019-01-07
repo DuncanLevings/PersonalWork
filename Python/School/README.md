@@ -1,4 +1,0 @@
-#  School Python projects
-
-
-
