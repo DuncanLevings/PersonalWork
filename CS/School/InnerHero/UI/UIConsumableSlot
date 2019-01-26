@@ -1,0 +1,72 @@
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
+public class UIConsumableSlot : UIEquipSlot
+{
+  public Sprite defaultSprite;
+  public UIItemImage img;
+  public UIItemStatic_Bag ioo;
+
+  private void Start()
+  {
+    if (Object.op_Equality((Object) this.display, (Object) null))
+      this.display = (GameItemDisplay) ((Component) this).GetComponent<GameItemDisplay>();
+    int index = HeroBag.Instance.consumableSlots.IndexOf(((Component) this).get_gameObject());
+    this.img = (UIItemImage) ((Component) this).GetComponentInChildren<UIItemImage>();
+    if (index >= this.EquipmentStruc.Consumables.Length || index == -1 || !Object.op_Inequality((Object) this.EquipmentStruc.Consumables[index].icon, (Object) null))
+      return;
+    ((Behaviour) this.img).set_enabled(true);
+    this.img.set_sprite(this.EquipmentStruc.Consumables[index].icon);
+    GameObject invSlot = HeroBag.Instance.invSlots[this.EquipmentStruc.Consumables[index].indexInInventory];
+    this.ioo = (UIItemStatic_Bag) invSlot.GetComponent<UIItemStatic_Bag>();
+    this.display.gameItem.slotReference = (UIItemStatic_Bag) invSlot.GetComponent<UIItemStatic_Bag>();
+    if (Object.op_Equality((Object) this.display.gameItem.slotReference.displayInfo, (Object) null))
+      this.display.gameItem.slotReference.Start();
+    this.display.gameItem.slotReference.displayInfo.gameItem.equipReference = (UIEquipSlot) this;
+    this.display.gameItem = this.display.gameItem.slotReference.displayInfo.gameItem;
+    ((Text) ((Component) ((Component) this).GetComponentInChildren<UITextCounter>()).GetComponent<Text>()).set_text("x " + HeroBag.Instance.hIv.InventorySlots[this.EquipmentStruc.Consumables[index].indexInInventory].amount.ToString());
+  }
+
+  private void Update()
+  {
+    if (!Object.op_Equality((Object) this.img.get_sprite(), (Object) null))
+      return;
+    this.img.set_sprite(this.defaultSprite);
+  }
+
+  public override void PlaceItem(GameObject prefab = null, UIItemStatic caller = null)
+  {
+    GameItemDisplay component = (GameItemDisplay) ((Component) caller).GetComponent<GameItemDisplay>();
+    if ((object) ((object) component.gameItem.scripObjRef).GetType() != (object) typeof (ConsumableItemObject))
+      return;
+    base.PlaceItem(prefab, caller);
+    GameItem gameItem = ((GameItemDisplay) ((Component) caller).GetComponent<GameItemDisplay>()).gameItem;
+    GameItem_Consumable gameItemConsumable = new GameItem_Consumable(gameItem.scripObjRef);
+    gameItemConsumable.itemName = gameItem.itemName;
+    gameItemConsumable.icon = gameItem.icon;
+    gameItemConsumable.value = gameItem.value;
+    gameItemConsumable.InventoryIndex = HeroBag.Instance.consumableSlots.IndexOf(((Component) this).get_gameObject());
+    int index = HeroBag.Instance.consumableSlots.IndexOf(((Component) this).get_gameObject());
+    this.EquipmentStruc.Consumables[index] = gameItemConsumable;
+    this.EquipmentStruc.Consumables[index].indexInInventory = component.gameItem.indexInInventory;
+    UIItemStatic_Bag uiItemStaticBag = (UIItemStatic_Bag) caller;
+    ((Text) ((Component) ((Component) this).GetComponentInChildren<UITextCounter>()).GetComponent<Text>()).set_text("x " + HeroBag.Instance.hIv.InventorySlots[this.EquipmentStruc.Consumables[index].indexInInventory].amount.ToString());
+    if (Object.op_Equality((Object) component.gameItem.getBag(), (Object) null))
+      uiItemStaticBag.setGameItemReference();
+    component.gameItem.getBag().verifyEquipped();
+  }
+
+  public override void OnPointerUp(PointerEventData evData)
+  {
+    base.OnPointerUp(evData);
+    this.Unequip();
+  }
+
+  public override void Unequip()
+  {
+    ((Text) ((Component) ((Component) this).GetComponentInChildren<UITextCounter>()).GetComponent<Text>()).set_text("x 0");
+    base.Unequip();
+    this.EquipmentStruc.Consumables[HeroBag.Instance.consumableSlots.IndexOf(((Component) this).get_gameObject())] = (GameItem_Consumable) null;
+  }
+}
