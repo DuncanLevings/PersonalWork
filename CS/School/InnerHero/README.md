@@ -4,6 +4,8 @@ Inner Heros is a Android mobile game set in a top-down 3d world where a player c
 The player can complete dungeons, make use of autonomous play, upgrade the player via abilitys and item. 
 The player can also design, create and use a personalized city to allow for character upgrades.
 
+**Disclaimer:** Orgininal project files were unobtainable, all code was retrieved through reverse engerineering the game APK file.
+
 ## Built With
 
 * [Unity](https://unity3d.com/)
