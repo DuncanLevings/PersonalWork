@@ -1,9 +1,3 @@
-// Decompiled with JetBrains decompiler
-// Type: ActiveSkillbitBase
-// Assembly: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: FF427592-9464-4031-9AF7-E8EEDF896718
-// Assembly location: C:\Users\Duncan\Desktop\Assembly-CSharp.dll
-
 using UnityEngine;
 
 public abstract class ActiveSkillbitBase : MonoBehaviour
