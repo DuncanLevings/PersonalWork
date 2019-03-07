@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AssignmentN1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+
+    <style>
+        .myButton {
+            border:1px solid black;
+            display:inline-block;
+            cursor:pointer;
+            color:white;
+            font-size:13px;
+            padding: 5px;
+            margin-top: 5px;
+            margin-left: 5px;
+        }
+
+        .myButton:active {
+            position:relative;
+            top:1px;
+        }
+
+        .container {
+            display: flex;
+            height: 100%;
+            font-size: 25vmax;
+        }
+
+        .box {
+            position: absolute;
+            background-color: dodgerblue;
+            color: white;
+            border: 5px solid black;
+            top: 0px;
+            left: 0px;
+        }
+
+        .highlight{
+            background:red;
+        }
+
+    </style>
+</head>
+<body>
+<div id="buttons">
+    <div class="myButton" id="create" style="background: dodgerblue">Add Box</div>
+    <div class="myButton" id="remove" style="background: gray">Remove Box</div>
+    <div class="myButton" id="removeAll" style="background: red">Remove All</div>
+</div>
+
+
+<div class="container" id="view">
+
+</div>
+
+<script>
+    var boxes = [];
+    var $windowX;
+    var $windowY;
+
+    var PI = {
+        onReady: function() {
+            $('#buttons').on("click", "div", function(event) {
+                var elem = $( this );
+                if ( elem.is("#create") ) {
+                    PI.create_box();
+                } else if (elem.is("#remove")) {
+                    PI.remove_box(false);
+                } else if (elem.is("#removeAll")) {
+                    PI.remove_box(true);
+                }
+            });
+
+            $('#view').on("click", "div", function(event) {
+                this.classList.toggle("highlight");
+            });
+
+            PI.resize();
+            $(window).on('resize', function() {
+                PI.resize();
+            });
+        },
+
+        create_box: function () {
+            var $div = $("<div></div>");
+            $div.text(boxes.length + 1);
+            $div.css("font-size", PI.get_random(1, 25) + 'vmax');
+            $div.addClass('box');
+
+            var $box = $div.clone().appendTo('#view');
+            $box['xspeed'] = PI.get_random(-10, 10);
+            $box['yspeed'] = PI.get_random(-10, 10);
+            $box['x'] = PI.get_center($box, $windowX);
+            $box['y'] = PI.get_center($box, $windowY);
+
+            PI.updateAnimation($box);
+
+            $box['id'] = setInterval(PI.updateAnimation, 100, $box);
+
+            boxes.push($box);
+        },
+
+        remove_box : function(type) {
+            if (boxes.length < 1) {
+                return;
+            }
+
+            if (type) {
+                $("#view").children().remove();
+                for (var i = 0; i < boxes.length; i++) {
+                    clearInterval(boxes[i].id);
+                }
+                boxes.length = 0;
+            }
+            else {
+
+                $("#view").children("div:last").remove();
+                clearInterval(boxes[boxes.length - 1].id);
+                boxes.pop();
+            }
+        },
+
+        updateAnimation : function($ball) {
+            $ball.y = $ball.y + $ball.yspeed;
+            $ball.x = $ball.x + $ball.xspeed;
+            if ($ball.x <= -1 || $ball.x + $ball.outerWidth() >= $windowX) {
+                $ball.xspeed = $ball.xspeed * -1;
+            }
+
+            if ($ball.x < -10 || $ball.x + ($ball.outerWidth() - 10) >= $windowX) {
+                PI.set_center($ball);
+            }
+
+            if ($ball.y <= -1 || $ball.y + $ball.outerHeight() >= $windowY) {
+                $ball.yspeed = $ball.yspeed * -1;
+            }
+
+            if ($ball.y < -10 || $ball.y + ($ball.outerHeight() - 10) >= $windowY) {
+                PI.set_center($ball);
+            }
+
+            $ball.css("top", $ball.y + "px");
+            $ball.css("left", $ball.x + "px");
+        },
+
+        get_random : function(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        },
+
+        get_center : function($object, $window) {
+            return ($window / 2) - ($object.outerWidth() / 2);
+        },
+
+        set_center : function($object) {
+            $object.y = ($windowY / 2) - ($object.outerHeight() / 2);
+            $object.x = ($windowX / 2) - ($object.outerWidth() / 2);
+        },
+
+        resize : function() {
+            $windowY = window.innerHeight;
+            $windowX = window.innerWidth;
+        }
+    };
+    $(document).ready(PI.onReady);
+</script>
+</body>
+</html>
