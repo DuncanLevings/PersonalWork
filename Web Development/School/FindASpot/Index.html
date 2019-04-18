@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <title>Find A Spot</title>
+    </head>
+    <body>
+    <div data-role="page" id="login">
+
+        <div data-role="header" data-position="fixed">
+            <h2>Find A Spot</h2>
+        </div>
+
+        <div role="main" class="ui-content">
+            <form id="myForm" action="#" method="post">
+                <div class="ui-field-contain">
+                    <label for="email">Email</label>
+                    <input data-corners="false" type="text" id="email" name="email" placeholder="Enter your e-mail">
+                </div>
+
+                <div class="ui-field-contain">
+                    <label for="password">Password</label>
+                    <input data-corners="false" type="password" id="password" name="password" placeholder="Enter your password">
+                </div>
+
+                <div data-role="popup" id="pop" data-position-to="window" data-transition="turn"></div>
+
+                <button id="loginBtn" type="button" class="ui-btn ui-icon-action ui-btn-icon-left">LOGIN</button>
+                <a id="createBtn" type="button" class="ui-btn ui-icon-action ui-btn-icon-left" href="#createAcc" data-transition="slideup">Create</a>
+            </form>
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+            <h4>Duncan Levings - Sheridan College</h4>
+        </div>
+    </div>
+
+    <div data-role="page" id="createAcc">
+
+        <div data-role="header" data-position="fixed">
+            <h2>Find A Spot</h2>
+        </div>
+
+        <div role="main" class="ui-content">
+            <div class="ui-field-contain">
+                <form id="accCreateForm" action="#" method="post">
+                    <div class="ui-field-contain">
+                        <label for="emailNew">Email</label>
+                        <input data-corners="false" type="text" id="emailNew" name="emailNew" placeholder="Enter your e-mail">
+                    </div>
+
+                    <div class="ui-field-contain">
+                        <label for="passwordNew">Password</label>
+                        <input data-corners="false" type="password" id="passwordNew" name="passwordNew" placeholder="Enter your password">
+                    </div>
+
+                    <div data-role="popup" id="popCreate" data-position-to="window" data-transition="turn"></div>
+
+                    <button id="createAccBtn" type="button" class="ui-btn ui-icon-action ui-btn-icon-left">Create Account</button>
+                </form>
+            </div>
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+            <h4>Duncan Levings - Sheridan College</h4>
+        </div>
+    </div>
+
+    <div data-role="page" id="startup">
+
+        <div data-role="header" data-position="fixed">
+            <a href="#login" data-icon="user" class="ui-btn-left" data-transition="slideup">Logout</a>
+            <h2>Find A Spot</h2>
+            <a href="#settings" data-icon="gear" class="ui-btn-right" data-transition="slideup">Settings</a>
+        </div>
+
+        <div role="main" class="ui-content">
+            <div class="ui-field-contain" style="margin-top:30px;">
+                <a class="ui-btn center-btn" href="#parking" data-transition="slideup" style="height:50px;font-size:36px;">Find Parking</a>
+                <button id="captureImage" class="ui-btn center-btn" style="height:100%;font-size:24px;">CAPTURE SPOT</button>
+                <a href="#popupImage" class="ui-btn center-btn" data-rel="popup" data-position-to="window" data-transition="fade" style="height:100%;font-size:24px;">View Spot</a>
+                <div data-role="popup" id="popupImage" data-overlay-theme="b" data-theme="b" data-corners="false">
+                        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><img id="image" class="popphoto" src="" style="max-height:512px;">
+                </div>
+            </div>
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+            <h4>Duncan Levings - Sheridan College</h4>
+        </div>
+    </div>
+
+    <div data-role="page"  id="settings">
+
+        <div data-role="header" data-position="fixed">
+            <a href="#login" data-icon="user" class="ui-btn-left" data-transition="slideup">Logout</a>
+            <h2>Find A Spot</h2>
+        </div>
+
+        <div role="main" class="ui-content">
+            <form id="settingsForm" action="#" method="post">
+                <div class="ui-field-contain">
+                    <label for="distance">Distance (Miles):</label>
+                    <input type="range" name="distance" data-highlight="true" id="distance" min="1" max="10" value="5">
+                </div>
+
+                <div class="ui-field-contain">
+                    <label for="price">Price (Hourly):</label>
+                    <input type="range" name="price" data-highlight="true" id="price" min="5" max="30" value="15">
+                </div>
+
+                <button id="saveSetting" type="button" class="ui-btn ui-icon-star ui-btn-icon-left">Save Settings</button>
+            </form>
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+            <h4>Duncan Levings - Sheridan College</h4>
+        </div>
+    </div>
+
+    <div data-role="page" id="parking">
+        <div data-role="header" data-position="fixed">
+            <a href="#login" data-icon="user" class="ui-btn-left" data-transition="slideup">Logout</a>
+            <h2>Find A Spot</h2>
+                <a href="#settings" data-icon="gear" class="ui-btn-right" data-transition="slideup">Settings</a>
+                <div data-role="navbar" data-iconpos="right">
+                    <ul>
+                        <li><button id="free-button" type="button" class="ui-btn active" data-view="#free-view">Free Parking</button></li>
+                        <li><button id="paid-button" type="button" class="ui-btn active" data-view="#paid-view">Paid Parking</button></li>
+                    </ul>
+                </div>
+        </div>
+
+        <div role="main" class="ui-content">
+            <div id="map"></div>
+            <section class="ui-grid-solo" id="content">
+            </section>
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+            <h4>Duncan Levings - Sheridan College</h4>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-firestore.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQIl-Fy3-dP9oFJ6c9VATiNYkcsrv5f0s&libraries=places"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/Controller.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    </body>
+</html>
