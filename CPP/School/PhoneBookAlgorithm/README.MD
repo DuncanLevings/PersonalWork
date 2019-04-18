@@ -1,4 +1,4 @@
-# Library Algorithm
+# Phonebook Algorithm
 
 Simulates inserting/ deleting/ sorting/ viewing a library of books
 Uses arrays and pointers only
