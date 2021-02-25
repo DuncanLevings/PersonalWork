@@ -1,8 +1,4 @@
 import pyodbc
-import json
-import pandas as pd
-import numpy as np
-import time
 
 server = 'Server=*******;'
 database = 'Database=******;'
